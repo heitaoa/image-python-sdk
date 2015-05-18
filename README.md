@@ -12,7 +12,7 @@ pip install tencentyun
 ## 修改配置
 修改tencentyun/conf.py内的appid等信息为您的配置
 
-## 图片上传、查询、删除程序示例（使用composer安装后生成的autoload）
+## 图片上传、查询、删除程序示例
 ```python
 import tencentyun
 
