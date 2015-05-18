@@ -1,4 +1,4 @@
-# tencentyun-image-php
+# tencentyun-image-python
 python sdk for [腾讯云万象图片服务](http://app.qcloud.com/image.html)
 
 ## 安装
