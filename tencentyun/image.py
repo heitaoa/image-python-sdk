@@ -123,6 +123,51 @@ class Image(object):
         else:
             return {'httpcode':r.status_code, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(r.raw), 'data':{}}
 
+    def copy(self, fileid, userid=0):
+        if not fileid:
+            return {'httpcode':0, 'code':self.IMAGE_PARAMS_ERROR, 'message':'params error', 'data':{}}
+
+        expired = int(time.time()) + self.EXPIRED_SECONDS
+        url = self.generate_res_url(userid, fileid, 'copy')
+        auth = Auth(self._secret_id, self._secret_key)
+        sign = auth.app_sign(url, expired)
+
+        headers = {
+            'Authorization':'QCloud '+sign,
+            'User-Agent':conf.get_ua(),
+        }
+
+        r = {}
+        try:
+            r = requests.post(url, headers=headers)
+            ret = r.json()
+        except Exception as e:
+            if r:
+                return {'httpcode':r.status_code, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(e), 'data':{}}
+            else:
+                return {'httpcode':0, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(e), 'data':{}}
+
+        if 'code' in ret:
+            if 0 == ret['code']:
+                return {
+                    'httpcode':r.status_code, 
+                    'code':ret['code'], 
+                    'message':ret['message'], 
+                    'data':{
+                        'url':ret['data']['url'],
+                        'download_url':ret['data']['download_url'],
+                    },
+                }
+            else:
+                return {
+                    'httpcode':r.status_code, 
+                    'code':ret['code'], 
+                    'message':ret['message'], 
+                    'data':{},
+                }
+        else:
+            return {'httpcode':r.status_code, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(r.raw), 'data':{}}
+
 
     def delete(self, fileid, userid=0):
         if not fileid:
