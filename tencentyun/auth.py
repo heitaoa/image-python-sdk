@@ -113,7 +113,8 @@ class Auth(object):
         plain_text = 'a=' + appid + '&k=' + self._secret_id + '&e=' + str(expired) + '&t=' + str(now) + '&r=' + str(rdm) + '&u=' + puserid + '&f=' + fileid
         bin = hmac.new(self._secret_key, plain_text, hashlib.sha1)
         s = bin.hexdigest()
-        s = binascii.unhexlify(s) + plain_text.encode('ascii')
+        s = binascii.unhexlify(s)
+        s = s + plain_text.encode('ascii')
         signature = base64.b64encode(s).rstrip()    #生成签名
         return signature
 
