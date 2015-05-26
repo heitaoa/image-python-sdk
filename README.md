@@ -43,7 +43,7 @@ if obj['code'] == 0 :
 
     # 生成上传签名
     expired = int(time.time()) + 999
-    sign = auth.app_sign('http://web.image.myqcloud.com/photos/v1/0/', expired)
+    sign = auth.app_sign('http://web.image.myqcloud.com/photos/v1/200679/0/', expired)
     print sign
 
     print image.delete(fileid)
