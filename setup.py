@@ -9,7 +9,7 @@ setup(
     keywords = ('tencentyun', 'qcloud'),
     description = 'python sdk for app.qcloud.com',
     license = 'MIT License',
-    install_requires = [],
+    install_requires=['requests'],
 
     author = 'jayli',
     author_email = 'jayli@tencent.com',
