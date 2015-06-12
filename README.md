@@ -47,4 +47,27 @@ if obj['code'] == 0 :
     print sign
 
     print image.delete(fileid)
+	
+	
+# 视频上传
+video = tencentyun.Video(appid,secret_id,secret_key)
+obj = video.upload('/tmp/test.mp4');
+print obj
+
+if obj['code'] == 0 :
+    fileid = obj['data']['fileid']
+    # 查询视频状态
+    statRet = video.stat(fileid)
+    print statRet
+    
+    # 生成上传签名
+    auth = tencentyun.Auth(secret_id,secret_key)
+    expired = int(time.time()) + 999
+    sign = auth.app_sign('http://web.video.myqcloud.com/videos/v1/200679/0/', expired)
+    print sign
+
+    # 删除视频
+    print video.delete(fileid)
+
+	
 ```

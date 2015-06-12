@@ -21,7 +21,7 @@ class Auth(object):
         end_point = app_info['end_point']
         info = urlparse(url)
         end_point_info = urlparse(end_point)
-        if info.hostname == end_point_info.hostname :
+        if (info.hostname == urlparse(conf.API_IMAGE_END_POINT).hostname or info.hostname == urlparse(conf.API_VIDEO_END_POINT).hostname) :
             # 非下载url
             if info.path :
                 parts = info.path.split('/')
