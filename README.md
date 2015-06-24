@@ -51,7 +51,8 @@ if obj['code'] == 0 :
 	
 # 视频上传
 video = tencentyun.Video(appid,secret_id,secret_key)
-obj = video.upload('/tmp/test.mp4');
+obj = video.upload('test.mp4','0','test_title','test_desc','test_magic_context')
+#obj = video.upload_slice('test.mp4','0','test_title','test_desc','test_magic_context')		#分片上传，适用于较大文件
 print obj
 
 if obj['code'] == 0 :

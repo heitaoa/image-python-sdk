@@ -18,7 +18,7 @@ class Image(object):
         conf.set_app_info(appid, secret_id, secret_key)
 
 
-    def upload(self, filepath, userid=0, magic_context=''):
+    def upload(self, filepath, userid='0', magic_context=''):
         filepath = os.path.abspath(filepath);
         if os.path.exists(filepath):
             expired = int(time.time()) + self.EXPIRED_SECONDS
@@ -73,7 +73,7 @@ class Image(object):
         else:
             return {'httpcode':0, 'code':self.IMAGE_FILE_NOT_EXISTS, 'message':'file not exists', 'data':{}}
 
-    def stat(self, fileid, userid=0):
+    def stat(self, fileid, userid='0'):
         if not fileid:
             return {'httpcode':0, 'code':self.IMAGE_PARAMS_ERROR, 'message':'params error', 'data':{}}
 
@@ -123,7 +123,7 @@ class Image(object):
         else:
             return {'httpcode':r.status_code, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(r.raw), 'data':{}}
 
-    def copy(self, fileid, userid=0):
+    def copy(self, fileid, userid='0'):
         if not fileid:
             return {'httpcode':0, 'code':self.IMAGE_PARAMS_ERROR, 'message':'params error', 'data':{}}
 
@@ -169,7 +169,7 @@ class Image(object):
             return {'httpcode':r.status_code, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(r.raw), 'data':{}}
 
 
-    def delete(self, fileid, userid=0):
+    def delete(self, fileid, userid='0'):
         if not fileid:
             return {'httpcode':0, 'code':self.IMAGE_PARAMS_ERROR, 'message':'params error', 'data':{}}
 
@@ -212,7 +212,7 @@ class Image(object):
             return {'httpcode':r.status_code, 'code':self.IMAGE_NETWORK_ERROR, 'message':str(r.raw), 'data':{}}
 
 
-    def generate_res_url(self, userid=0, fileid='', oper=''):
+    def generate_res_url(self, userid='0', fileid='', oper=''):
         app_info = conf.get_app_info()
         if fileid:
             if oper:
