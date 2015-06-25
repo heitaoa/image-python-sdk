@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'tencentyun',
-    version = '1.2.1',
+    version = '1.3.1',
     keywords = ('tencentyun', 'qcloud'),
     description = 'python sdk for app.qcloud.com',
     license = 'MIT License',
