@@ -31,3 +31,15 @@ if obj['code'] == 0 :
     print sign
 
     print image.delete(fileid)
+
+# 上传指定进行优图识别  fuzzy（模糊识别），food(美食识别）
+# 如果要支持模糊识别，url?analyze=fuzzy
+# 如果要同时支持模糊识别和美食识别，url?analyze=fuzzy.food
+# 返回数据中
+# "is_fuzzy" 1 模糊 0 清晰
+# "is_food" 1 美食 0 不是
+userid = 0
+magic_context = ''
+gets = {'analyze':'fuzzy.food'}
+obj = image.upload('/tmp/20150624100808134034653.jpg',userid,magic_context,{'get':gets});
+print obj

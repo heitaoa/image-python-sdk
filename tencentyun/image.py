@@ -2,6 +2,7 @@
 
 import os.path
 import time
+import urllib
 import requests
 from tencentyun import conf
 from .auth import Auth
@@ -18,7 +19,7 @@ class Image(object):
         conf.set_app_info(appid, secret_id, secret_key)
 
 
-    def upload(self, filepath, userid=0, magic_context=''):
+    def upload(self, filepath, userid=0, magic_context='', params={}):
         filepath = os.path.abspath(filepath);
         if os.path.exists(filepath):
             expired = int(time.time()) + self.EXPIRED_SECONDS
@@ -38,6 +39,10 @@ class Image(object):
 
             files = {'FileContent': open(filepath, 'rb')}
 
+            if params.has_key('get'):
+                query_str = urllib.urlencode(params['get']);
+                url = url + '?' + query_str
+
             r = {}
             try:
                 r = requests.post(url, data=data, headers=headers, files=files)
@@ -50,15 +55,20 @@ class Image(object):
             
             if 'code' in ret:
                 if 0 == ret['code']:
+                    data = {
+                        'url':ret['data']['url'],
+                        'download_url':ret['data']['download_url'],
+                        'fileid':ret['data']['fileid'],
+                    }
+                    if ret['data'].has_key('is_fuzzy'):
+                        data['is_fuzzy'] = ret['data']['is_fuzzy']
+                    if ret['data'].has_key('is_food'):
+                        data['is_food'] = ret['data']['is_food']                   
                     return {
                         'httpcode':r.status_code, 
                         'code':ret['code'], 
                         'message':ret['message'], 
-                        'data':{
-                            'url':ret['data']['url'],
-                            'download_url':ret['data']['download_url'],
-                            'fileid':ret['data']['fileid'],
-                        }
+                        'data':data
                     }
                 else:
                     return {

@@ -12,6 +12,21 @@ pip install tencentyun
 ## 修改配置
 修改tencentyun/conf.py内的appid等信息为您的配置
 
+## 万象优图上传识别示例
+```python
+# 上传指定进行优图识别  fuzzy（模糊识别），food(美食识别）
+# 如果要支持模糊识别，url?analyze=fuzzy
+# 如果要同时支持模糊识别和美食识别，url?analyze=fuzzy.food
+# 返回数据中
+# "is_fuzzy" 1 模糊 0 清晰
+# "is_food" 1 美食 0 不是
+userid = 0
+magic_context = ''
+gets = {'analyze':'fuzzy.food'}
+obj = image.upload('/tmp/20150624100808134034653.jpg',userid,magic_context,{'get':gets});
+print obj
+```
+
 ## 图片上传、查询、删除程序示例
 ```python
 # -*- coding: utf-8 -*-
