@@ -3,12 +3,13 @@
 import time
 import tencentyun
 
-appid = '200679'
-secret_id = 'AKIDoleG4e6U0j6EVQcjWXxzSO2Vv7Hqlgp2'
-secret_key = 'ROlw3XYdNXNnII18ATs6zd7m5mivnApa'
+appid = '200899'
+secret_id = 'AKIDXZE8z7kUBlltXgfjb8NgrgChrpTiiVNo'
+secret_key = '8W0dbC201JgEl8XPYTBFu0ulUxiNnuYv'
 
+# 图片上传
 image = tencentyun.Image(appid,secret_id,secret_key)
-obj = image.upload('/tmp/amazon.jpg');
+obj = image.upload('/tmp/20150624100808134034653.jpg');
 print obj
 
 if obj['code'] == 0 :
@@ -43,3 +44,24 @@ magic_context = ''
 gets = {'analyze':'fuzzy.food'}
 obj = image.upload('/tmp/20150624100808134034653.jpg',userid,magic_context,{'get':gets});
 print obj
+	
+# 视频上传
+video = tencentyun.Video(appid,secret_id,secret_key)
+obj = video.upload('test.mp4','0','test_title','test_desc','test_magic_context')
+#obj = video.upload_slice('test.mp4','0','test_title','test_desc','test_magic_context')		#分片上传，适用于较大文件
+print obj
+
+if obj['code'] == 0 :
+    fileid = obj['data']['fileid']
+    # 查询视频状态
+    statRet = video.stat(fileid)
+    print statRet
+    
+    # 生成上传签名
+    auth = tencentyun.Auth(secret_id,secret_key)
+    expired = int(time.time()) + 999
+    sign = auth.app_sign('http://web.video.myqcloud.com/videos/v1/200679/0/', expired)
+    print sign
+    # 删除视频
+    print video.delete(fileid)
+
