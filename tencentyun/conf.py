@@ -3,6 +3,7 @@ import pkg_resources
 import platform
 
 API_IMAGE_END_POINT = 'http://web.image.myqcloud.com/photos/v1/'
+API_IMAGE_END_POINT_V2 = 'http://web.image.myqcloud.com/photos/v2/'
 API_VIDEO_END_POINT = 'http://web.video.myqcloud.com/videos/v1/'
 APPID = '您的APPID'
 SECRET_ID = '您的SECRETID'
@@ -10,6 +11,7 @@ SECRET_KEY = '您的SECRETKEY'
 
 image_config = {
     'end_point':API_IMAGE_END_POINT,
+    'end_point_v2':API_IMAGE_END_POINT_V2,
     'appid':APPID,
     'secret_id':SECRET_ID,
     'secret_key':SECRET_KEY,
