@@ -3,11 +3,17 @@
 import time
 import tencentyun
 
+# V2版本 带有空间和自定义文件名的示例
+# 上传图片
+
+# 项目ID，在http://console.qcloud.com/image/bucket查看
 appid = '10000002'
 secret_id = 'AKIDL5iZVplWMenB5Zrx47X78mnCM3F5xDbC'
 secret_key = 'Lraz7n2vNcyW3tiP646xYdfr5KBV4YAv'
 
+# 自定义空间名称，在http://console.qcloud.com/image/bucket创建
 bucket = 'test1'
+# 自定义文件名
 fileid = 'sample'+str(int(time.time()))
 
 # 图片上传
