@@ -13,11 +13,11 @@ secret_id = 'AKIDL5iZVplWMenB5Zrx47X78mnCM3F5xDbC'
 secret_key = 'Lraz7n2vNcyW3tiP646xYdfr5KBV4YAv'
 
 # 自定义空间名称，在http://console.qcloud.com/image/bucket创建
-bucket = 'test1'
+bucket = 'test2'
 # 自定义文件名
 fileid = 'sample'+str(int(time.time()))
 
-image_path = 'test.jpg'
+image_path = '/tmp/amazon.jpg'
 
 # 图片上传
 image = tencentyun.ImageV2(appid,secret_id,secret_key)
@@ -27,30 +27,31 @@ obj = image.upload(image_path, bucket, fileid);
 # or in-memory data
 #binary_image = open(image_path).read()
 #obj = image.upload_binary(binary_image, bucket, fileid)
-print obj
+print 'upload:', obj
 
 if obj['code'] == 0 :
     fileid = obj['data']['fileid']
     statRet = image.stat(bucket, fileid)
-
-    fileid = obj['data']['fileid']
-    copyRet = image.copy(bucket, fileid)
-    download_url = copyRet['data']['download_url']
-    print copyRet
+    print 'stat:', statRet
 
     # 生成私密下载url
     auth = tencentyun.Auth(secret_id,secret_key)
-    expired = 0
+    expired = int(time.time()) + 999
     sign = auth.get_app_sign_v2(bucket, fileid, expired)
-    print download_url + '?sign=' + sign
-
-    #print image.delete(bucket, fileid)
+    download_url = statRet['data']['download_url']
+    print 'download_url:', download_url + '?sign=' + sign
 
     # 生成上传签名
     fileid = 'sample'+str(int(time.time()))
     expired = int(time.time()) + 999
     sign = auth.get_app_sign_v2(bucket, fileid, expired)
     print fileid, sign
+
+    fileid = obj['data']['fileid']
+    copyRet = image.copy(bucket, fileid)
+    print 'copy:', copyRet
+
+    #print image.delete(bucket, fileid)
 
 
 # 上传指定进行优图识别  fuzzy（模糊识别），food(美食识别）
@@ -62,5 +63,6 @@ if obj['code'] == 0 :
 userid = 0
 magic_context = ''
 gets = {'analyze':'fuzzy.food'}
+fileid = 'sample'+str(int(time.time()))+'new'
 obj = image.upload(image_path, bucket, fileid, userid, magic_context, {'get':gets});
 print obj
