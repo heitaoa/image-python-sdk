@@ -5,11 +5,12 @@ except ImportError:
 import sys
 
 pkgdir = {'': 'python%s' % sys.version_info[0]}
-VERSION = '2.1.1'
+VERSION = '2.1.2'
 
 setup(
     name='tencentyun',
     version=VERSION,
+    keywords = ('tencentyun', 'qcloud'),
     author='Jay Li, Jamis Hoo',
     author_email='jayli@tencent.com, hoojamis@gmail.com',
     url='https://github.com/tencentyun/python-sdk',
