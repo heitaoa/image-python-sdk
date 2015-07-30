@@ -1,10 +1,16 @@
 # tencentyun-image-python
-python sdk for [腾讯云万象图片服务](http://app.qcloud.com/image.html)
+Python 2/3 SDK for [腾讯云万象图片服务](http://app.qcloud.com/image.html)
 
 ## 安装
 
 ### 使用pip
+Python 2:
+
 pip install tencentyun
+
+Python 3:
+
+pip3 install tencentyun
 
 ### 下载源码
 从github下载源码装入到您的程序中，并加载tencentyun包

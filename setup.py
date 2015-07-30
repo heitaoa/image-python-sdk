@@ -1,19 +1,25 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+import sys
 
-from setuptools import setup, find_packages
+pkgdir = {'': 'python%s' % sys.version_info[0]}
+VERSION = '2.1.2'
 
 setup(
-    name = 'tencentyun',
-    version = '2.0.0',
+    name='tencentyun',
+    version=VERSION,
     keywords = ('tencentyun', 'qcloud'),
-    description = 'python sdk for app.qcloud.com',
-    license = 'MIT License',
-    install_requires=['requests'],
-
-    author = 'jayli',
-    author_email = 'jayli@tencent.com',
-    
-    packages = find_packages(),
-    platforms = 'any',
+    author='Jay Li, Jamis Hoo',
+    author_email='jayli@tencent.com, hoojamis@gmail.com',
+    url='https://github.com/tencentyun/python-sdk',
+    download_url='https://codeload.github.com/tencentyun/python-sdk/tar.gz/%s' % VERSION,
+    description='Python 2/3 SDK for app.qcloud.com',
+    license='MIT',
+    # long_description="",
+    package_dir=pkgdir,
+    packages=['tencentyun'],
+    classifiers=[ ],
 )
+
