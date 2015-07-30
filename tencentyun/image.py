@@ -18,14 +18,14 @@ class Image(object):
         self._secret_id,self._secret_key = secret_id,secret_key
         conf.set_app_info(appid, secret_id, secret_key)
 
-    def upload(self, filepath, userid = 0, magic_context = '', params = {}):
+    def upload(self, filepath, userid = '0', magic_context = '', params = {}):
         filepath = os.path.abspath(filepath)
         if not os.path.exists(filepath):
             return {'httpcode':0, 'code':self.IMAGE_FILE_NOT_EXISTS, 'message':'file not exists', 'data':{}}
 
         return self.upload_impl(filepath, 0, userid, magic_context, params)
 
-    def upload_binary(self, file_binary, userid = 0, magic_context = '', params = {}):
+    def upload_binary(self, file_binary, userid = '0', magic_context = '', params = {}):
         return self.upload_impl(file_binary, 1, userid, magic_context, params)
 
 
