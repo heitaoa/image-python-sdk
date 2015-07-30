@@ -32,7 +32,7 @@ class ImageV2(object):
         expired = int(time.time()) + self.EXPIRED_SECONDS
         url = self.generate_res_url_v2(bucket, userid, fileid)
         auth = Auth(self._secret_id, self._secret_key)
-        sign = auth.app_sign_v2(url, expired)
+        sign = auth.get_app_sign_v2(bucket, fileid, expired)
 
         data = {}
         if magic_context:
@@ -97,7 +97,7 @@ class ImageV2(object):
         expired = int(time.time()) + self.EXPIRED_SECONDS
         url = self.generate_res_url_v2(bucket, userid, fileid)
         auth = Auth(self._secret_id, self._secret_key)
-        sign = auth.app_sign_v2(url, expired)
+        sign = auth.get_app_sign_v2(bucket, fileid, expired)
 
         headers = {
             'Authorization':'QCloud '+sign,
@@ -144,10 +144,10 @@ class ImageV2(object):
         if not fileid:
             return {'httpcode':0, 'code':self.IMAGE_PARAMS_ERROR, 'message':'params error', 'data':{}}
 
-        expired = int(time.time()) + self.EXPIRED_SECONDS
+        expired = 0
         url = self.generate_res_url_v2(bucket, userid, fileid, 'copy')
         auth = Auth(self._secret_id, self._secret_key)
-        sign = auth.app_sign_v2(url, expired)
+        sign = auth.get_app_sign_v2(bucket, fileid, expired)
 
         headers = {
             'Authorization':'QCloud '+sign,
@@ -190,10 +190,10 @@ class ImageV2(object):
         if not fileid:
             return {'httpcode':0, 'code':self.IMAGE_PARAMS_ERROR, 'message':'params error', 'data':{}}
 
-        expired = int(time.time()) + self.EXPIRED_SECONDS
+        expired = 0
         url = self.generate_res_url_v2(bucket, userid, fileid, 'del')
         auth = Auth(self._secret_id, self._secret_key)
-        sign = auth.app_sign_v2(url, expired)
+        sign = auth.get_app_sign_v2(bucket, fileid, expired)
 
         headers = {
             'Authorization':sign,
@@ -243,6 +243,7 @@ class ImageV2(object):
     def generate_res_url_v2(self, bucket, userid='0', fileid='', oper=''):
         app_info = conf.get_app_info()
         if fileid:
+            fileid = urllib.quote_plus(fileid);
             if oper:
                 return app_info['end_point_v2'] + str(app_info['appid']) + '/' + str(bucket) + '/' + str(userid) + '/' + str(fileid) + '/' + oper
             else:

@@ -40,15 +40,18 @@ if obj['code'] == 0 :
 
     # 生成私密下载url
     auth = tencentyun.Auth(secret_id,secret_key)
-    sign = auth.app_sign_v2(download_url)
+    expired = 0
+    sign = auth.get_app_sign_v2(bucket, fileid, expired)
     print download_url + '?sign=' + sign
 
-    # 生成上传签名
-    expired = int(time.time()) + 999
-    sign = auth.app_sign_v2('http://test1-10000002.image.myqcloud.com/test1-10000002/0/sample1436341553/', expired)
-    print sign
+    #print image.delete(bucket, fileid)
 
-    print image.delete(bucket, fileid)
+    # 生成上传签名
+    fileid = 'sample'+str(int(time.time()))
+    expired = int(time.time()) + 999
+    sign = auth.get_app_sign_v2(bucket, fileid, expired)
+    print fileid, sign
+
 
 # 上传指定进行优图识别  fuzzy（模糊识别），food(美食识别）
 # 如果要支持模糊识别，url?analyze=fuzzy
