@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import time
@@ -7,9 +8,17 @@ appid = '200899'
 secret_id = 'AKIDXZE8z7kUBlltXgfjb8NgrgChrpTiiVNo'
 secret_key = '8W0dbC201JgEl8XPYTBFu0ulUxiNnuYv'
 
+image_path = 'test.jpg'
+
 # 图片上传
 image = tencentyun.Image(appid,secret_id,secret_key)
-obj = image.upload('/tmp/20150624100808134034653.jpg');
+
+# upload by filename
+obj = image.upload(image_path);
+# or in-memory data
+#binary_image = open(image_path).read()
+#obj = image.upload_binary(binary_image)
+
 print obj
 
 if obj['code'] == 0 :
@@ -42,7 +51,7 @@ if obj['code'] == 0 :
 userid = 0
 magic_context = ''
 gets = {'analyze':'fuzzy.food'}
-obj = image.upload('/tmp/20150624100808134034653.jpg',userid,magic_context,{'get':gets});
+obj = image.upload('test.jpg',userid,magic_context,{'get':gets});
 print obj
 	
 # 视频上传
