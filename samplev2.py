@@ -17,10 +17,10 @@ image_path = 'test.jpg'
 image = tencentyun.ImageV2(appid,secret_id,secret_key)
 
 # upload by filename
-#obj = image.upload(image_path, bucket, fileid);
+obj = image.upload(image_path, bucket, fileid);
 # or in-memory data
-binary_image = open(image_path).read()
-obj = image.upload_binary(binary_image, bucket, fileid)
+#binary_image = open(image_path).read()
+#obj = image.upload_binary(binary_image, bucket, fileid)
 print obj
 
 if obj['code'] == 0 :
