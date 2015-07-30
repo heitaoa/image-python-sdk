@@ -5,7 +5,7 @@ except ImportError:
 import sys
 
 pkgdir = {'': 'python%s' % sys.version_info[0]}
-VERSION = '2.1.0'
+VERSION = '2.1.1'
 
 setup(
     name='tencentyun',
@@ -14,7 +14,7 @@ setup(
     author_email='jayli@tencent.com, hoojamis@gmail.com',
     url='https://github.com/tencentyun/python-sdk',
     download_url='https://codeload.github.com/tencentyun/python-sdk/tar.gz/%s' % VERSION,
-    description='Pyton 2/3 SDK for app.qcloud.com',
+    description='Python 2/3 SDK for app.qcloud.com',
     license='MIT',
     # long_description="",
     package_dir=pkgdir,
