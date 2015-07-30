@@ -5,7 +5,7 @@ except ImportError:
 import sys
 
 pkgdir = {'': 'python%s' % sys.version_info[0]}
-VERSION = '2.1.2'
+VERSION = '2.1.3'
 
 setup(
     name='tencentyun',
