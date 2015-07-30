@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import time
@@ -10,9 +11,16 @@ secret_key = 'Lraz7n2vNcyW3tiP646xYdfr5KBV4YAv'
 bucket = 'test1'
 fileid = 'sample'+str(int(time.time()))
 
+image_path = 'test.jpg'
+
 # 图片上传
 image = tencentyun.ImageV2(appid,secret_id,secret_key)
-obj = image.upload('/tmp/amazon.jpg', bucket, fileid);
+
+# upload by filename
+#obj = image.upload(image_path, bucket, fileid);
+# or in-memory data
+binary_image = open(image_path).read()
+obj = image.upload_binary(binary_image, bucket, fileid)
 print obj
 
 if obj['code'] == 0 :
@@ -45,5 +53,5 @@ if obj['code'] == 0 :
 userid = 0
 magic_context = ''
 gets = {'analyze':'fuzzy.food'}
-obj = image.upload('/tmp/amazon.jpg', bucket, fileid, userid, magic_context, {'get':gets});
+obj = image.upload(image_path, bucket, fileid, userid, magic_context, {'get':gets});
 print obj
