@@ -8,7 +8,7 @@ secret_id = "AKIDL5iZVplWMenB5Zrx47X78mnCM3F5xDbC"
 secret_key = "Lraz7n2vNcyW3tiP646xYdfr5KBV4YAv"
 
 bucket = "test1"
-fileid = "sample800000"
+fileid = "sample" + str(int(time.time()))
 
 sample_image_path = "test_image.jpg"
 
@@ -42,14 +42,17 @@ if obj["code"] == 0:
 
     # generate private download URL
     auth = tencentyun.Auth(secret_id,secret_key)
-    sign = auth.app_sign_v2(download_url)
+    expired = 0
+    sign = auth.get_app_sign_v2(bucket, fileid, expired)
     print("Private download URL: ")
     print(download_url + "?sign=" + sign)
 
     # generate upload signature
+    copy_fileid = 'sample' + str(int(time.time()))
     expired = int(time.time()) + 999
-    sign = auth.app_sign_v2("http://test1-10000002.image.myqcloud.com/test1-10000002/0/sample1436341553/", expired)
+    sign = auth.get_app_sign_v2(bucket, copy_fileid, expired)
     print("Upload signature: ")
+    print(copy_fileid)
     print(sign)
 
 
