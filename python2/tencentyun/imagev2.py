@@ -47,7 +47,7 @@ class ImageV2(object):
         }
 
         if filetype == 0:
-            files = {'FileContent': open(fileobj, 'rb')}
+            files = {'FileContent': open(fileobj.decode("utf-8"), 'rb')}
         elif filetype == 1:
             files = { 'FileContent': fileobj }
 
