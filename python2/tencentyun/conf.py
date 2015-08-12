@@ -43,7 +43,7 @@ def set_app_info(appid=None,secret_id=None,secret_key=None):
         video_config['secret_key'] = secret_key
 
 def get_ua():
-    version = "2.1.4"
+    version = "2.1.5"
     return 'QcloudPYTHON/'+version+' ('+platform.platform()+')';
 
 
