@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import pkg_resources
 import platform
 
 API_IMAGE_END_POINT = 'http://web.image.myqcloud.com/photos/v1/'
@@ -45,7 +44,7 @@ def set_app_info(appid = None, secret_id = None, secret_key = None):
         video_config['secret_key'] = secret_key
 
 def get_ua():
-    version = pkg_resources.require("tencentyun")[0].version
+    version = "2.1.5"
     return 'QcloudPYTHON/' + version + ' (' + platform.platform() + ')';
 
 
