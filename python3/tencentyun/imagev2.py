@@ -58,6 +58,7 @@ class ImageV2(object):
                     'url': ret['data']['url'],
                     'download_url': ret['data']['download_url'],
                     'fileid': ret['data']['fileid'],
+                    'info':ret['data']['info']
                 }
                 if 'is_fuzzy' in ret['data']:
                     data['is_fuzzy'] = ret['data']['is_fuzzy']
