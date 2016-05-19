@@ -17,7 +17,7 @@ bucket = 'test2'
 
 #智能鉴黄
 imageprocess = tencentyun.ImageProcess(appid,secret_id,secret_key,bucket)
-pornUrl = 'http://b.hiphotos.baidu.com/image/pic/item/8ad4b31c8701a18b1efd50a89a2f07082938fec7.jpg';
+pornUrl = 'http://b.hiphotos.baidu.com/image/pic/item/8ad4b31c8701a18b1efd50a89a2f07082938fec7.jpg'
 pornRet = imageprocess.porn_detect(pornUrl)
 print 'pornRet:', pornRet
 
