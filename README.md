@@ -91,6 +91,15 @@ print obj
 
 ```
 
+## 智能鉴黄示例
+```python
+imageprocess = tencentyun.ImageProcess(appid,secret_id,secret_key,bucket)
+pornUrl = 'http://b.hiphotos.baidu.com/image/pic/item/8ad4b31c8701a18b1efd50a89a2f07082938fec7.jpg';
+pornRet = imageprocess.porn_detect(pornUrl)
+print 'pornRet:', pornRet
+```
+
+
 ## 万象优图上传识别示例
 ```python
 # 上传指定进行优图识别  fuzzy（模糊识别），food(美食识别）
