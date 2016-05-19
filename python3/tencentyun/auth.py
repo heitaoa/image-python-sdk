@@ -6,6 +6,7 @@ import random
 import hmac, hashlib
 import binascii
 import base64
+import urllib
 from urllib.parse import urlparse
 from tencentyun import conf
 
@@ -53,7 +54,29 @@ class Auth(object):
         signature = base64.b64encode(s).rstrip()    #生成签名
         return signature.decode('ascii')
 
+    def get_porn_detect_sign(self, url):
+        """  智能鉴黄签名函数
+        Args:
+            url: 请求的鉴黄url
+        """
+        app_info = conf.get_app_info()
+        appid = app_info['appid']
+        bucket = app_info['bucket']
+        expired = int(time.time())+10
+        current = int(time.time())
 
+        url_dic = {'l':url}
+        plain_text = 'a=' + appid + '&b=' + bucket +'&k=' + self._secret_id + '&t=' + str(current) + '&e=' + str(expired) + '&' + urllib.parse.urlencode(url_dic)
+        
+        if isinstance(plain_text, str):
+            plain_text = plain_text.encode("utf-8")
+
+        bin = hmac.new(self._secret_key.encode('ascii'), plain_text, hashlib.sha1)
+        s = bin.hexdigest()
+        s = binascii.unhexlify(s)
+        s = s + plain_text
+        signature = base64.b64encode(s).rstrip()    #生成签名
+        return signature.decode('ascii')
 
     def get_info_from_url(self, url):
         app_info = conf.get_app_info()

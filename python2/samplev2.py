@@ -14,6 +14,13 @@ secret_key = 'Lraz7n2vNcyW3tiP646xYdfr5KBV4YAv'
 
 # 自定义空间名称，在http://console.qcloud.com/image/bucket创建
 bucket = 'test2'
+
+#智能鉴黄
+imageprocess = tencentyun.ImageProcess(appid,secret_id,secret_key,bucket)
+pornUrl = 'http://b.hiphotos.baidu.com/image/pic/item/8ad4b31c8701a18b1efd50a89a2f07082938fec7.jpg';
+pornRet = imageprocess.porn_detect(pornUrl)
+print 'pornRet:', pornRet
+
 # 自定义文件名
 fileid = 'sample'+str(int(time.time()))
 

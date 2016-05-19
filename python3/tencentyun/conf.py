@@ -4,17 +4,21 @@ import platform
 
 API_IMAGE_END_POINT = 'http://web.image.myqcloud.com/photos/v1/'
 API_IMAGE_END_POINT_V2 = 'http://web.image.myqcloud.com/photos/v2/'
+API_PORNDETECT_END_POINT = 'http://service.image.myqcloud.com/detection/pornDetect/'
 API_VIDEO_END_POINT = 'http://web.video.myqcloud.com/videos/v1/'
 APPID = 'Your APPID'
 SECRET_ID = 'Your SECRETID'
 SECRET_KEY = 'Your SECRETKEY'
+BUCKET = 'Your BUCKET'
 
 image_config = {
     'end_point': API_IMAGE_END_POINT,
     'end_point_v2': API_IMAGE_END_POINT_V2,
+    'end_point_porndetect':API_PORNDETECT_END_POINT,
     'appid': APPID,
     'secret_id': SECRET_ID,
     'secret_key': SECRET_KEY,
+    'bucket':BUCKET,
 }
 
 video_config = {
@@ -22,6 +26,7 @@ video_config = {
     'appid': APPID,
     'secret_id': SECRET_ID,
     'secret_key': SECRET_KEY,
+    'bucket':BUCKET,
 }
 
 def get_app_info(cate = 'image'):
@@ -32,7 +37,7 @@ def get_app_info(cate = 'image'):
     else:
         return ''
 
-def set_app_info(appid = None, secret_id = None, secret_key = None):
+def set_app_info(appid = None, secret_id = None, secret_key = None, bucket = None):
     if appid:
         image_config['appid'] = appid
         video_config['appid'] = appid
@@ -42,6 +47,9 @@ def set_app_info(appid = None, secret_id = None, secret_key = None):
     if secret_key:
         image_config['secret_key'] = secret_key
         video_config['secret_key'] = secret_key
+    if bucket:
+        image_config['bucket'] = bucket
+        video_config['bucket'] = bucket
 
 def get_ua():
     version = "2.1.5"
