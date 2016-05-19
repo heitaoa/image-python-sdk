@@ -63,8 +63,8 @@ class Auth(object):
         app_info = conf.get_app_info()
         appid = app_info['appid']
         bucket = app_info['bucket']
-        expired = 1463624052+30000#int(time.time())+10
-        current = 1463624052#int(time.time())
+        expired = int(time.time())+10
+        current = int(time.time())
         url_dic = {'l':url}
         plain_text = 'a=' + appid + '&b=' + bucket +'&k=' + self._secret_id + '&t=' + str(current) + '&e=' + str(expired) + '&' + urllib.urlencode(url_dic)
         bin = hmac.new(self._secret_key, plain_text, hashlib.sha1)
