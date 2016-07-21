@@ -54,19 +54,16 @@ class Auth(object):
         signature = base64.b64encode(s).rstrip()    #生成签名
         return signature.decode('ascii')
 
-    def get_porn_detect_sign(self, url):
-        """  智能鉴黄签名函数
-        Args:
-            url: 请求的鉴黄url
-        """
+    def get_porn_detect_sign(self, url = None):
         app_info = conf.get_app_info()
         appid = app_info['appid']
         bucket = app_info['bucket']
-        expired = int(time.time())+10
+        expired = int(time.time())+1000
         current = int(time.time())
 
-        url_dic = {'l':url}
-        plain_text = 'a=' + appid + '&b=' + bucket +'&k=' + self._secret_id + '&t=' + str(current) + '&e=' + str(expired) + '&' + urllib.parse.urlencode(url_dic)
+        #url_dic = {'l':url}
+        #plain_text = 'a=' + appid + '&b=' + bucket +'&k=' + self._secret_id + '&t=' + str(current) + '&e=' + str(expired) + '&' + urllib.parse.urlencode(url_dic)
+        plain_text = 'a=' + appid + '&b=' + bucket +'&k=' + self._secret_id + '&t=' + str(current) + '&e=' + str(expired)
         
         if isinstance(plain_text, str):
             plain_text = plain_text.encode("utf-8")

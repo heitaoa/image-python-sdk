@@ -1,5 +1,5 @@
-# tencentyun-image-python
-Python 2/3 SDK for [腾讯云万象图片服务](http://app.qcloud.com/image.html)
+# tencentyun/image-python-sdk
+腾讯云 [万象优图（Cloud Image）](https://www.qcloud.com/product/ci.html) SDK for Python2/Python3
 
 ## 安装
 
@@ -30,12 +30,12 @@ import tencentyun
 # 上传图片
 
 # 项目ID，在http://console.qcloud.com/image/bucket查看
-appid = '10000002'
-secret_id = 'AKIDL5iZVplWMenB5Zrx47X78mnCM3F5xDbC'
-secret_key = 'Lraz7n2vNcyW3tiP646xYdfr5KBV4YAv'
+appid = '111'
+secret_id = 'secret_id'
+secret_key = 'secret_key'
 
 # 自定义空间名称，在http://console.qcloud.com/image/bucket创建
-bucket = 'test2'
+bucket = 'bucket'
 # 自定义文件名
 fileid = 'sample'+str(int(time.time()))
 
@@ -94,11 +94,38 @@ print obj
 ## 智能鉴黄示例
 ```python
 imageprocess = tencentyun.ImageProcess(appid,secret_id,secret_key,bucket)
+
+#智能鉴黄，单个图片Url
 pornUrl = 'http://b.hiphotos.baidu.com/image/pic/item/8ad4b31c8701a18b1efd50a89a2f07082938fec7.jpg'
 pornRet = imageprocess.porn_detect(pornUrl)
 print 'pornRet:', pornRet
-```
 
+#智能鉴黄，单个或多个图片Url
+pornUrl = [
+        'http://b.hiphotos.baidu.com/image/pic/item/8ad4b31c8701a18b1efd50a89a2f07082938fec7.jpg',
+        'http://c.hiphotos.baidu.com/image/h%3D200/sign=7b991b465eee3d6d3dc680cb73176d41/96dda144ad3459829813ed730bf431adcaef84b1.jpg',
+    ]
+pornRet = imageprocess.porn_detect_url(pornUrl)
+print 'pornRet:', pornRet
+
+#智能鉴黄，单个或多个图片File
+pornFile = [
+        'D:/porn/test1.jpg',
+        'D:/porn/test2.jpg',
+        '../../../../../porn/test3.png',
+    ]
+pornRet = imageprocess.porn_detect_file(pornFile)
+print 'pornRet:', pornRet
+```
+注意：如果您要鉴黄的图片文件或路径中包含中文，请修改requests包的packages/urlib3中的fields.py文件
+将format_header_param方法中的倒数第二行
+```python
+value = '%s*=%s' % (name, value)
+```
+修改为
+```python
+value = '%s="%s"' % (name, value)
+```
 
 ## 万象优图上传识别示例
 ```python

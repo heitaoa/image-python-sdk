@@ -4,9 +4,9 @@
 import time
 import tencentyun
 
-appid = "200899"
-secret_id = "AKIDXZE8z7kUBlltXgfjb8NgrgChrpTiiVNo"
-secret_key = "8W0dbC201JgEl8XPYTBFu0ulUxiNnuYv"
+appid = "111"
+secret_id = "secret_id"
+secret_key = "secret_key"
 
 sample_image_path = "test_image.jpg"
 sample_video_path = "test_video.mp4"
